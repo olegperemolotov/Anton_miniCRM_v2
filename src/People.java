@@ -10,6 +10,12 @@ public class People implements Serializable{
     static ArrayList<People> peoplelist = new ArrayList<People>();
     static ObjectOutputStream out;
 
+    People(String name, String lastname){
+        this.name = name;
+        this.lastname = lastname;
+        peoplelist.add(peoplelist.size(), this);
+    }
+
     @Override
     public int hashCode(){
         return name.hashCode()+lastname.hashCode();
@@ -40,37 +46,20 @@ public class People implements Serializable{
     }
 
 
-    static {
-        try {
-            out = new ObjectOutputStream(new FileOutputStream("objects2.dat"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    People(String name, String lastname){
-        this.name = name;
-        this.lastname = lastname;
-        peoplelist.add(peoplelist.size(), this);
-    }
-
-
+    // Записать имя и фамилию человека
     public void setnameLastname(String name, String lastname){
         this.name = name;
         this.lastname = lastname;
     }
 
+    // Показать имя и фамилию человека
     public void getnameLastname(){
         System.out.println(" Имя:"+this.name+" Фамилия"+this.lastname+" является элементом:"+peoplelist.indexOf(this));
 
     }
 
-    public void serialize() throws IOException {
-        out.writeObject(this);
-    }
 
-
-
+    // Показать номер в списке
     public static void showpeoplelist(){
         System.out.println(peoplelist.size());
     }
